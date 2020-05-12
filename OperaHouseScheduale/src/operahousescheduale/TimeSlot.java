@@ -31,7 +31,7 @@ public class TimeSlot {
     }
     
     // The getters and the setters of all the vairables in the class.
-
+//
     public String getTimeSlot() {
         return timeSlot;
     }
