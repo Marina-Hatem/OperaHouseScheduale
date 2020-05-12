@@ -24,7 +24,7 @@ public class Hall {
     public Hall() {
     }
 
-    // The loaded Constractor for the class to initatite in it the variables.
+    // The loaded Constractor for this class as to initilize the variables also when inilizaing new halls.
     public Hall(int hallID, int capacity, String hallNumber) {
         this.hallID = hallID;
         this.capacity = capacity;
