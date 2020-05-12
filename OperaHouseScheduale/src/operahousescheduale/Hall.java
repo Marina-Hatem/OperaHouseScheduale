@@ -20,10 +20,11 @@ public class Hall {
     // Hall number like hal12 or hall6.
     private String hallNumber;
 
+    // The default constractor
     public Hall() {
     }
 
-    // Constractor for the class to initatite in it the variabkes.
+    // The loaded Constractor for the class to initatite in it the variables.
     public Hall(int hallID, int capacity, String hallNumber) {
         this.hallID = hallID;
         this.capacity = capacity;
