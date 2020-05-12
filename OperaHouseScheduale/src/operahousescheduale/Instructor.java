@@ -9,18 +9,24 @@ package operahousescheduale;
  *
  * @author Yasmine
  */
+
+// This class for thr instructors that will taught the courses.
 public class Instructor {
      private int InstructorID;
     private String InstructorName;
-//    Default Constructor
+    
+    
+     //  Default Constructor
     public Instructor() {
     }
     
+    // overLoaded constractor to inilize the variables.
     public Instructor(int InstructorID, String InstructorName) {
         this.InstructorID = InstructorID;
         this.InstructorName = InstructorName;
     }
 
+    // The getters and the setters 
     public int getInstructorID() {
         return InstructorID;
     }
