@@ -10,25 +10,41 @@ package operahousescheduale;
  */
 public class Group {
 
-    private final int groupId;
-    private final int groupSize;
-    private final int CourseIds[];
+    private  int groupId;
+    private  int groupSize;
+    private  int CourseIds[];
 
-    public Group(int groupId, int groupSize, int CourseIds[]) {
+    public Group(int groupId, int groupSize, int[] CourseIds) {
         this.groupId = groupId;
         this.groupSize = groupSize;
         this.CourseIds = CourseIds;
     }
+    
+    
 
     public int getGroupId() {
-        return this.groupId;
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public int getGroupSize() {
-        return this.groupSize;
+        return groupSize;
+    }
+
+    public void setGroupSize(int groupSize) {
+        this.groupSize = groupSize;
     }
 
     public int[] getCourseIds() {
-        return this.CourseIds;
+        return CourseIds;
     }
+
+    public void setCourseIds(int[] CourseIds) {
+        this.CourseIds = CourseIds;
+    }
+
+   
 }
