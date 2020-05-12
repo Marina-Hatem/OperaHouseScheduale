@@ -11,9 +11,9 @@ package operahousescheduale;
  */
 public class Class {
 
-    private final int classId;
-    private final int groupId;
-    private final int CourseId;
+    private  int classId;
+    private  int groupId;
+    private  int CourseId;
     private int InstructorId;
     private int timeslotId;
     private int HallId;
@@ -32,10 +32,40 @@ public class Class {
         this.timeslotId = timeslotId;
     }
 
-    public void setRoomId(int roomId) {
+    public void setHallId(int HallId) {
         this.HallId = HallId;
     }
 
+    public int getInstructorId() {
+        return InstructorId;
+    }
+
+    public void setInstructorId(int InstructorId) {
+        this.InstructorId = InstructorId;
+    }
+
+    public int getHallId() {
+        return HallId;
+    }
+
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    public void setCourseId(int CourseId) {
+        this.CourseId = CourseId;
+    }
+
+    public void setTimeslotId(int timeslotId) {
+        this.timeslotId = timeslotId;
+    }
+
+
+    
     public int getClassId() {
         return this.classId;
     }
