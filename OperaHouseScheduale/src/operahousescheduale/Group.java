@@ -24,7 +24,7 @@ public class Group {
         this.CourseIds = CourseIds;
     }
     
-   // The getters and the setters 
+   // The getters and the setters.
 
     public int getGroupId() {
         return groupId;
