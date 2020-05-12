@@ -9,6 +9,10 @@ package operahousescheduale;
  *
  * @author Toumie
  */
+
+// The Class class represents a combination of all of the other classes. It represents a trainers group taking a course at a specific time, in a specific hall,
+//with a specific Instructor in the opera house .
+
 public class Class {
 
     private  int classId;
@@ -18,13 +22,14 @@ public class Class {
     private int timeslotId;
     private int HallId;
 
+    // The overloaded constactor which inilize all the variables.
     public Class(int classId, int groupId, int CourseId) {
         this.classId = classId;
         this.CourseId = CourseId;
         this.groupId = groupId;
     }
 
-    public void addProfessor(int professorId) {
+    public void addProfessor(int InstructorId) {
         this.InstructorId = InstructorId;
     }
 
