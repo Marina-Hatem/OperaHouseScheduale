@@ -28,6 +28,8 @@ public class Class {
         this.CourseId = CourseId;
         this.groupId = groupId;
     }
+    
+    
 
     public void addProfessor(int InstructorId) {
         this.InstructorId = InstructorId;
