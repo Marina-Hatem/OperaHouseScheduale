@@ -40,7 +40,7 @@ public class TimeTable {
 		this.timeslots = new HashMap<Integer, TimeSlot>();
 	}
         
-        
+        // The constractor has a object from timetable to set or inilize the hashMap
         
         public TimeTable(TimeTable timetable) {
 		this.halls = timetable.getHalls();
@@ -51,7 +51,7 @@ public class TimeTable {
 	}
 
         
-        
+        // The getters 
     public HashMap<Integer, Hall> getHalls() {
         return halls;
     }
@@ -79,6 +79,14 @@ public class TimeTable {
     public int getNumClasses() {
         return numClasses;
     }
-        
+      
+    // To add a hall in the hashMap , by a put function which takes to parameter. First parameter it takes the key valye or the unique 
+    
+    public void addHall(int hallID, int capacity, String hallNumber) {
+		this.halls.put(hallID, new Hall(hallID, capacity, hallNumber));
+                
+    }
+    
+    
         
 }
