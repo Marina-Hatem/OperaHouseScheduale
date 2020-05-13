@@ -20,7 +20,7 @@ public class OperaHouseScheduale {
         // Get a Timetable object with all the available information.
         TimeTable timetable = initializeOperaTimetable();
         
-        // Initialize GA
+        // Initialize Genetic Algorthims
         GeneticAlgorthims ga = new GeneticAlgorthims(100, 0.01, 0.9, 2, 5);
         
         // Initialize population
