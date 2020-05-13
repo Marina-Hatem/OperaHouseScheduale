@@ -312,38 +312,59 @@ public class TimeTable {
 		return timeslot;
 	}
 
-        
+        // This functtion calculates the number of conflicts that can be occur. The conflicts are the constriants so it test if there are constraints interleaved each other 
         public int calcConflicts() {
+            
+            // Making int counter for confilicts , its name conflicts and inilized by 0.
 		int conflicts = 0;
 
+                
+                // This enhanced ForLoop made an object from class Class and its name is classA , and it will loop in the classes array
 		for (Class classA : this.classes) {
-			// Check room capacity
+                    
+                         // First it will check for the first constraint which is the Hall capicaty is enough for the size of the group 
+                         // Function getHall it was for searching about id and getting all its info from class Hall. So it takes ClassA.getHallID() and it will return 
+                         // the hall info from the hall id. Then it will get the capacity from inside it.And store it inside variable called hallCapacity
 			int hallCapacity = this.getHall(classA.getHallId()).getCapacity();
+                        // Function getGroup it was for searching about id and getting all its info from class Group. So it takes ClassA.getGroupID() and it will return 
+                         // the group info from the group id. Then it will get group size from inside it. And store it inside variable called groupSize
 			int groupSize = this.getGroup(classA.getGroupId()).getGroupSize();
 			
+                        // Then the if condition is comparing between the two variables (hallCapacity and the groupSize) it check if the hall capicaty is samller than 
+                        // the group size , then it is a conflict and conflict will be incremented by 1.
 			if (hallCapacity < groupSize) {
 				conflicts++;
 			}
 
-			// Check if room is taken
+                        
+			// This enhanced ForLoop made another object from class Class and its name is classB , and it will loop in the classes array
 			for (Class classB : this.classes) {
+                                // Second it will check if the hall is taken by another course or in other words if the hall have two things at the sametime
+                                // This if condition check if the hall id in the two classes objects are the same and the two timeSlot id are the same and if they are different classes,
+                                // then these mean that there are two things in the same time and there is conflict 
 				if (classA.getHallId()== classB.getHallId() && classA.getTimeslotId() == classB.getTimeslotId()
 						&& classA.getClassId() != classB.getClassId()) {
+                                    // The variable conflicts will be incremented by 1, then it will break and get outside the forloop
 					conflicts++;
 					break;
 				}
 			}
 
-			// Check if professor is available
+			// This enhanced ForLoop made another object from class Class and its name is classB , and it will loop in the classes array
 			for (Class classB : this.classes) {
+                               // Third it will check if the instractor is teaching two courses in the same time 
+                               // This if condition check if the Instructor id in the two classes objects are the same and the two timeSlot id are the same and if they are different classes,
+                               // then these mean that the instractor give two courses in the same time and there is conflict 
 				if (classA.getInstructorId()== classB.getInstructorId() && classA.getTimeslotId() == classB.getTimeslotId()
 						&& classA.getClassId() != classB.getClassId()) {
+                                     // The variable conflicts will be incremented by 1, then it will break and get outside the forloop
 					conflicts++;
 					break;
 				}
 			}
 		}
 
+                // Finally it will return the number of the conflicts after these conditions 
 		return conflicts;
 	}
 
