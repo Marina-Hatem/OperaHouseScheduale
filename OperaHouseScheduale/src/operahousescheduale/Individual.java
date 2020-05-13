@@ -80,4 +80,77 @@ public class Individual {
 		// The individual will be stored inside thr array of chromosome
 		this.chromosome = individual;
 	}
+    
+    // Initializes individual with specific chromosome
+    
+    public Individual(int[] chromosome) {
+		// creatingindividual chromosome
+		this.chromosome = chromosome;
+	}
+    
+    // get the individual's chromosome
+    public int[] getChromosome() {
+		return this.chromosome;
+	}
+    
+    // getting the Individual's chromsome length
+    public int getChromosomeLength() {
+		return this.chromosome.length;
+	}
+    
+    
+    // Set gene at offset
+    public void setGene(int offset, int gene) {
+		this.chromosome[offset] = gene;
+	}
+    
+    // Set gene at offset
+    public int getGene(int offset) {
+		return this.chromosome[offset];
+	}
+    
+    // Store individual's fitness
+    public void setFitness(double fitness) {
+		this.fitness = fitness;
+	}
+    
+    
+    // Gets individual's fitness
+    public double getFitness() {
+		return this.fitness;
+	}
+    
+    /**
+     *
+     * @return output
+     */
+    @Override
+    
+    // To String return the String in a specific format to print it anywhere
+    public String toString() {
+		String output = "";
+		for (int gene = 0; gene < this.chromosome.length; gene++) {
+                    // The output varaible store the chromsome gene inside it 
+			output += this.chromosome[gene] + ",";
+		}
+                // Fianlly it return the output with have the Chromsome's gene
+		return output;
+	}
+
+
+    
+        // Searching for a specific int gene inside the individual 
+	public boolean containsGene(int gene) {
+                // This for loop lopps on the chromsome length
+		for (int i = 0; i < this.chromosome.length; i++) {
+                       // If the chromomse of i is equal to gene which we searching for it will return true 
+			if (this.chromosome[i] == gene) {
+				return true;
+			}
+		}
+                // If not it will return false
+		return false;
+	}
+
+
 }
