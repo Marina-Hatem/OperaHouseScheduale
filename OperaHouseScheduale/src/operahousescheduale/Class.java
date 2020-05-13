@@ -31,7 +31,7 @@ public class Class {
     
     
 
-    public void addProfessor(int InstructorId) {
+    public void addInstructor(int InstructorId) {
         this.InstructorId = InstructorId;
     }
 

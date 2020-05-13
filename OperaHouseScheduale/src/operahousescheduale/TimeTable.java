@@ -129,7 +129,45 @@ public class TimeTable {
         this.timeslots.put(timeslotId, new TimeSlot(timeslotId, timeslot));
     }
 
-    
+    //This function is creating a Class which takes an object from class Individual which is Individual chromosome, and then it returns an array of Class
+    public void createClasses(Individual individual) {
+		// Init classes
+                // Making an array for class Class and inside it, it get the number of classes
+		Class classes[] = new Class[this.getNumClasses()];
+
+		// Get individual's chromosome
+                // Make an array of int for the chromosome (chromosome is like 010011) and inilize it by accessing class Individual and getting getChromosome() function
+		int chromosome[] = individual.getChromosome();
+                // Making a variable called chromosomePositin which is intilized by zero
+		int chromosomePos = 0;
+                // Making a variable called classIndex which is for the array as to set in it values. It is inilized by 0
+		int classIndex = 0;
+
+                // It is enhanced forLoop 
+		for (Group group : this.getGroupsAsArray()) {
+			int moduleIds[] = group.getCourseIds();
+			for (int moduleId : moduleIds) {
+				classes[classIndex] = new Class(classIndex, group.getGroupId(), moduleId);
+
+				// Add timeslot
+				classes[classIndex].addTimeslot(chromosome[chromosomePos]);
+				chromosomePos++;
+
+				// Add room
+				classes[classIndex].setHallId(chromosome[chromosomePos]);
+				chromosomePos++;
+
+				// Add professor
+				classes[classIndex].addProfessor(chromosome[chromosomePos]);
+				chromosomePos++;
+
+				classIndex++;
+			}
+		}
+
+		this.classes = classes;
+	}
+
         
         
 }
