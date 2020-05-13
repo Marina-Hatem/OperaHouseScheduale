@@ -25,9 +25,9 @@ public class TimeSlot {
     }
 
     // The loaded constractor which have all the variables and initlize this variables. Also, for initializing new TimeSlot
-    public TimeSlot(String timeSlot, int timeslotID) {
-        this.timeSlot = timeSlot;
+    public TimeSlot( int timeslotID, String timeSlot) {
         this.timeslotID = timeslotID;
+         this.timeSlot = timeSlot;
     }
     
     // The getters and the setters of all the vairables in the class.
