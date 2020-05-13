@@ -129,7 +129,12 @@ public class TimeTable {
         this.timeslots.put(timeslotId, new TimeSlot(timeslotId, timeslot));
     }
 
-    //This function is creating a Class which takes an object from class Individual which is Individual chromosome, and then it returns an array of Class
+    // This function is creating a Class which takes an object from class Individual which is Individual chromosome, and then it returns an array of Class
+    // It needs to know the total no of groups and courses that must be scheduled. Creates a no of Classes ojects for these groups and courses. 
+    // It read the chromosome and assigns the variable info to class TimeSlot, Hall and Instructor.
+    // The goal of the gentic algorthim is here the chromosome try a different combinations between timeslots,Halls and Instructors to make a timetable.
+    // Then it check on it , if there is any conflict or clashes (clashes or conflicts is the constraints which are 1) The Hall size 2) The professor teach one course at a time 
+    // 3) The hall is for one course only at a time. It can't be two courses in the same timeslot and in same hall.
     public void createClasses(Individual individual) {
 		// Init classes
                 // Making an array for class Class and inside it, it get the number of classes
@@ -143,31 +148,97 @@ public class TimeTable {
                 // Making a variable called classIndex which is for the array as to set in it values. It is inilized by 0
 		int classIndex = 0;
 
-                // It is enhanced forLoop 
+                // It is enhanced forLoop that loops on group array 
 		for (Group group : this.getGroupsAsArray()) {
-			int moduleIds[] = group.getCourseIds();
-			for (int moduleId : moduleIds) {
-				classes[classIndex] = new Class(classIndex, group.getGroupId(), moduleId);
+                    // It is array of courseID which is inside class Group
+                    // It is a variable which is int array of courses IDs and it is inilized by getting all the ids from class Group
+			int courseIds[] = group.getCourseIds();
+                        
+                        // It is enhanced forLoop that loops on courseIDs array
+			for (int courseId : courseIds) {
+                            
+                            // In the first index in the array of classes will add new Class. class index it is like the classID. Then it get the groupId from thr looping. 
+                            // And finally it put the courseId which it loop on it.
+				classes[classIndex] = new Class(classIndex, group.getGroupId(), courseId);
 
-				// Add timeslot
+				// Add TimeSlot
 				classes[classIndex].addTimeslot(chromosome[chromosomePos]);
 				chromosomePos++;
 
-				// Add room
+				// Add Hall
 				classes[classIndex].setHallId(chromosome[chromosomePos]);
 				chromosomePos++;
 
-				// Add professor
-				classes[classIndex].addProfessor(chromosome[chromosomePos]);
+				// Add Instructor 
+				classes[classIndex].addInstructor(chromosome[chromosomePos]);
 				chromosomePos++;
 
+                                // Finally thr classIndex is incrematnted by 1.
 				classIndex++;
 			}
 		}
-
+                // It take all of this and set it in the array of classes
 		this.classes = classes;
 	}
+    
+    
 
+        // This function it take a hallID and then search inside the hashmap of halls if the id is found then it return Hall from the hallID
+        // This function wants to get specific Hall but it first check if it is avaliable of not by searching by the hallID
+        public Hall getRoom(int hallID) {
+            // This if condition says that if the hashmap halls doesn't contain the entered hallID , then this hall doesn't exisit.And print a statment says that hashmap halls
+            // don't have this ID.
+		if (!this.halls.containsKey(hallID)) {
+			System.out.println("Halls doesn't have this " + hallID);
+		}
+                
+                // If the ID was iniside the array then it will return this Hall 
+		return (Hall) this.halls.get(hallID);
+	}
+        
+        
+        // This function get random hall and return it 
+        public Hall getRandomRoom() {
+            
+               // Object is a superclass which have everything
+               // Object array accepts different types like string, int , float and many more. So the array type is Object as to take the values from the halls hashMap
+		Object[] hallArray = this.halls.values().toArray();
+                // Here it get a random Hall and put it inside array hallArray and then it cast it's type to Hall class
+		Hall hall = (Hall) hallArray[(int) (hallArray.length * Math.random())];
+                
+                // Finally it return the random Hall in a variable named hall
+		return hall;  
+	}
+        
+        // This function it take a instructorID and then search inside the hashmap of instructoras if the id is found then it return instructor from the instructorID
+        // This function wants to get specific Instructor but it first check if the instructor id exisits inside the hashMap or not.
+        public Instructor getInstructor(int instructorID) {
+             // This if condition says that if the hashmap instructors doesn't contain the entered instructorID , then this instructor doesn't exisit.And print a statment says that hashmap instructors
+            // don't have this ID.
+            if (!this.instructors.containsKey(instructorID)) {
+                
+			System.out.println("Instructors doesn't have this " + instructorID);
+		}
+            
+               // If the ID was iniside the hashmap then it will return this instructor 
+		return (Instructor) this.instructors.get(instructorID);
+	}
+
+	// This function it take a courseID and then search inside the hashmap of courses if the id is found then it return course from the courseID
+        // This function wants to get specific Course but it first check if the Course id exisits inside the hashMap or not.
+	public Course getCourse(int courseID) {
+            // This if condition says that if the hashmap courses doesn't contain the entered courseID , then this instructor doesn't exisit.And print a statment says that hashmap courses
+            // don't have this ID.
+            if (!this.courses.containsKey(courseID)) {
+                
+			System.out.println("Courses doesn't have this " + courseID);
+		}
+            
+                 // If the ID was iniside the hashmap then it will return this Course 
+		return (Course) this.courses.get(courseID);
+	}
+        
         
         
 }
+
