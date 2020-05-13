@@ -313,8 +313,8 @@ public class TimeTable {
 	}
 
         
-        public int calcClashes() {
-		int clashes = 0;
+        public int calcConflicts() {
+		int conflicts = 0;
 
 		for (Class classA : this.classes) {
 			// Check room capacity
@@ -322,14 +322,14 @@ public class TimeTable {
 			int groupSize = this.getGroup(classA.getGroupId()).getGroupSize();
 			
 			if (hallCapacity < groupSize) {
-				clashes++;
+				conflicts++;
 			}
 
 			// Check if room is taken
 			for (Class classB : this.classes) {
 				if (classA.getHallId()== classB.getHallId() && classA.getTimeslotId() == classB.getTimeslotId()
 						&& classA.getClassId() != classB.getClassId()) {
-					clashes++;
+					conflicts++;
 					break;
 				}
 			}
@@ -338,13 +338,13 @@ public class TimeTable {
 			for (Class classB : this.classes) {
 				if (classA.getInstructorId()== classB.getInstructorId() && classA.getTimeslotId() == classB.getTimeslotId()
 						&& classA.getClassId() != classB.getClassId()) {
-					clashes++;
+					conflicts++;
 					break;
 				}
 			}
 		}
 
-		return clashes;
+		return conflicts;
 	}
 
 }
