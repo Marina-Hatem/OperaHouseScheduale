@@ -16,7 +16,8 @@ public class Individual {
     // varaible named fitness which is inilized by -1
     private double fitness = -1;
     
-    public Individual(Timetable timetable) {
+    
+    public Individual(TimeTable timetable) {
 		int numClasses = timetable.getNumClasses();
 
 		// 1 gene for room, 1 for time, 1 for professor
@@ -27,20 +28,20 @@ public class Individual {
 		// Loop through groups
 		for (Group group : timetable.getGroupsAsArray()) {
 			// Loop through modules
-			for (int moduleId : group.getModuleIds()) {
+			for (int courseId : group.getCourseIds()) {
 				// Add random time
-				int timeslotId = timetable.getRandomTimeslot().getTimeslotId();
+				int timeslotId = timetable.getRandomTimeslot().getTimeslotID();
 				newChromosome[chromosomeIndex] = timeslotId;
 				chromosomeIndex++;
 
 				// Add random room
-				int roomId = timetable.getRandomRoom().getRoomId();
-				newChromosome[chromosomeIndex] = roomId;
+				int hallId = timetable.getRandomHall().getHallID();
+				newChromosome[chromosomeIndex] = hallId;
 				chromosomeIndex++;
 
 				// Add random professor
-				Module module = timetable.getModule(moduleId);
-				newChromosome[chromosomeIndex] = module.getRandomProfessorId();
+				Course course = timetable.getCourse(courseId);
+				newChromosome[chromosomeIndex] = course.getRandomInstructorID();
 				chromosomeIndex++;
 			}
 		}

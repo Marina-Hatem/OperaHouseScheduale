@@ -217,7 +217,7 @@ public class TimeTable {
         
         
         // This function get random hall and return it 
-        public Hall getRandomRoom() {
+        public Hall getRandomHall() {
             
                // Object is a superclass which have everything
                // Object array accepts different types like string, int , float and many more. So the array type is Object as to take the values from the halls hashMap
