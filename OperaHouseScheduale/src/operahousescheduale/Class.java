@@ -85,15 +85,9 @@ public class Class {
         return this.CourseId;
     }
 
-    public int getProfessorId() {
-        return this.InstructorId;
-    }
 
     public int getTimeslotId() {
         return this.timeslotId;
     }
 
-    public int getRoomId() {
-        return this.HallId;
-    }
 }

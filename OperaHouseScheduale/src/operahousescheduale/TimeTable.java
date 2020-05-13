@@ -80,10 +80,29 @@ public class TimeTable {
 
     public Class[] getClasses() {
         return classes;
-    }
-
+    } 
+    
+    // This get Funtion get all the classes that need to be shcduled , also we want to get the number of classes 
     public int getNumClasses() {
-        return numClasses;
+        
+        // if the number of classes is bigger than 0 , then it return thr numClasses int variable
+        if (this.numClasses > 0) {
+			return this.numClasses;
+		}
+
+                // if the number is equal zero , we will make an array of Group called groups then it will put inside it all the values inisidethe hashmap groups
+                // then it will for loop on the array 
+                //then inside the for loop numClasses will equal numClasses plus the length of the array of courseIDs inside class group
+		int numClasses = 0;
+		Group groups[] = (Group[]) this.groups.values().toArray(new Group[this.groups.size()]);
+		for (Group group : groups) {
+			numClasses += group.getCourseIds().length;
+		}
+                // Finally it store the number in the variable NumClasses
+		this.numClasses = numClasses;
+
+                // Then it return the numClasses
+		return this.numClasses;
     }
 
     // To add a hall in the hashMap , by  put function which takes two parameter. First parameter it takes the key value or the unique key which here is the hallID
@@ -185,7 +204,7 @@ public class TimeTable {
 
         // This function it take a hallID and then search inside the hashmap of halls if the id is found then it return Hall from the hallID
         // This function wants to get specific Hall but it first check if it is avaliable of not by searching by the hallID
-        public Hall getRoom(int hallID) {
+        public Hall getHall(int hallID) {
             // This if condition says that if the hashmap halls doesn't contain the entered hallID , then this hall doesn't exisit.And print a statment says that hashmap halls
             // don't have this ID.
 		if (!this.halls.containsKey(hallID)) {
@@ -238,7 +257,95 @@ public class TimeTable {
 		return (Course) this.courses.get(courseID);
 	}
         
+        // This function take a groupId and then make an object from class Group named group and it get the groupId from the hashmap and then cast to class Group to get 
+        // all its info then it return the int array of the courseID that is inside this object group.
+        public int[] getGroupCourses(int groupId) {
+		Group group = (Group) this.groups.get(groupId);
+		return group.getCourseIds();
+	}
+
+	// This function it take a groupID and then search inside the hashmap of groups if the id is found then it return Group from the groupID
+        // This function wants to get specific Group but it first check if the Group id exisits inside the hashMap or not.
+	public Group getGroup(int groupId) {
+            
+             // This if condition says that if the hashmap groups doesn't contain the entered groupID , then this Group doesn't exisit.And print a statment says that hashmap groups
+            // don't have this ID.
+            if (!this.groups.containsKey(groupId)) {
+                
+			System.out.println("groups doesn't have this " + groupId);
+		}
+            
+                // If the ID was iniside the hashmap then it will return this Group 
+		return (Group) this.groups.get(groupId);
+	}
         
         
+        // This function return group as an array and put all the values in this array, as to used it in the enhanced forloop
+        public Group[] getGroupsAsArray() {
+		return (Group[]) this.groups.values().toArray(new Group[this.groups.size()]);
+	}
+
+
+        // This function it take a timeslotId and then search inside the hashmap of timeslots if the id is found then it return TimeSlot from the timeslotId
+        // This function wants to get specific TimeSlot but it first check if the timeslot id exisits inside the hashMap or not.
+	public TimeSlot getTimeslot(int timeslotId) {
+            
+            // This if condition says that if the hashmap timeslots doesn't contain the entered timeslotId , then this TimeSlot doesn't exisit.And print a statment says that hashmap timeslots
+            // don't have this ID.
+            if (!this.timeslots.containsKey(timeslotId)) {
+                
+			System.out.println("groups doesn't have this " + timeslotId);
+		}
+            
+                 // If the ID was iniside the hashmap then it will return this TimeSlot 
+		return (TimeSlot) this.timeslots.get(timeslotId);
+	}
+
+	// This function get random Timeslot and return it 
+	public TimeSlot getRandomTimeslot() {
+               // Object is a superclass which have everything
+               // Object array accepts different types like string, int , float and many more. So the array type is Object as to take the values from the timeslots hashMap
+		Object[] timeslotArray = this.timeslots.values().toArray();
+                // Here it get a random timeslot and put it inside array timeslotArray and then it cast it's type to TimeSlot class
+		TimeSlot timeslot = (TimeSlot) timeslotArray[(int) (timeslotArray.length * Math.random())];
+                 // Finally it return the random TimeSlot in a variable named timeslot
+		return timeslot;
+	}
+
+        
+        public int calcClashes() {
+		int clashes = 0;
+
+		for (Class classA : this.classes) {
+			// Check room capacity
+			int hallCapacity = this.getHall(classA.getHallId()).getCapacity();
+			int groupSize = this.getGroup(classA.getGroupId()).getGroupSize();
+			
+			if (hallCapacity < groupSize) {
+				clashes++;
+			}
+
+			// Check if room is taken
+			for (Class classB : this.classes) {
+				if (classA.getHallId()== classB.getHallId() && classA.getTimeslotId() == classB.getTimeslotId()
+						&& classA.getClassId() != classB.getClassId()) {
+					clashes++;
+					break;
+				}
+			}
+
+			// Check if professor is available
+			for (Class classB : this.classes) {
+				if (classA.getInstructorId()== classB.getInstructorId() && classA.getTimeslotId() == classB.getTimeslotId()
+						&& classA.getClassId() != classB.getClassId()) {
+					clashes++;
+					break;
+				}
+			}
+		}
+
+		return clashes;
+	}
+
 }
 
