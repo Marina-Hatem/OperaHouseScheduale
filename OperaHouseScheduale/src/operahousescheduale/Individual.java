@@ -14,6 +14,7 @@ public class Individual {
     // The chromosome is array of int as the chromosome is like (101010). Chromosome  binary number which means 0's and 1's
     private int[] chromosome;
     // varaible named fitness which is inilized by -1
+    // fitness is evaluation for the soultion
     private double fitness = -1;
     
     // This is a constractor that take an object from class TimeTable, also this function create a random  valid chromosome 
